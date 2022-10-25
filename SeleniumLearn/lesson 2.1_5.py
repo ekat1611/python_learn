@@ -1,5 +1,6 @@
 import math
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 import time
 
@@ -12,20 +13,20 @@ browser = webdriver.Chrome()
 
 browser.get('http://suninjuly.github.io/math.html')
 time.sleep(5)
-x_element = browser.find_element_by_css_selector('#input_value')
+x_element = browser.find_element(By.CSS_SELECTOR, '#input_value')
 x = x_element.text
 y = calc(x)
 
-textarea = browser.find_element_by_css_selector('#answer')
+textarea = browser.find_element(By.CSS_SELECTOR, '#answer')
 textarea.send_keys(y)
 
-checkbox = browser.find_element_by_css_selector('#robotCheckbox')
+checkbox = browser.find_element(By.CSS_SELECTOR, '#robotCheckbox')
 checkbox.click()
 
-radiobutton = browser.find_element_by_css_selector('#robotsRule')
+radiobutton = browser.find_element(By.CSS_SELECTOR, '#robotsRule')
 radiobutton.click()
 
-submit = browser.find_element_by_css_selector('.btn-default')
+submit = browser.find_element(By.CSS_SELECTOR, '.btn-default')
 submit.click()
 
 time.sleep(10)

@@ -10,7 +10,7 @@ try:
     last_name = browser.find_element(By.CSS_SELECTOR, "[name='lastname']")
     last_name.send_keys('Shiganova')
     email = browser.find_element(By.CSS_SELECTOR, "[name='email']")
-    email.send_keys('test@mail.ru')
+    email.send_keys('test_addoption.py@mail.ru')
     file = browser.find_element(By.CSS_SELECTOR, '#file')
     file.send_keys('/Users/user/Desktop/Тестирование/my-projects/python_learn/SeleniumLearn/lesson 2.1_7.py')
     submit = browser.find_element(By.CSS_SELECTOR, '.btn-primary')

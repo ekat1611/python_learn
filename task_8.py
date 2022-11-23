@@ -20,12 +20,12 @@ class Static:
         self.__x = new_x
 
 
-# test = Static(-1)
+# test_addoption.py = Static(-1)
 # ValueError
 test = Static(1)
 print(test.x)
 test.x = 2
 print(test.x)
 # 2
-# test.x = -1
+# test_addoption.py.x = -1
 # ValueError

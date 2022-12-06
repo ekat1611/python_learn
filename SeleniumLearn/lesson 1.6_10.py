@@ -3,16 +3,16 @@ import time
 from selenium.webdriver.common.by import By
 
 try:
-    link = "http://suninjuly.github.io/registration1.html"
+    link = "http://suninjuly.github.io/registration2.html"
     browser = webdriver.Chrome()
     browser.get(link)
 
     # Ваш код, который заполняет обязательные поля
-    first_name = browser.find_element(By.CSS_SELECTOR, '[placeholder = "Input your first name"]')
+    first_name = browser.find_element(By.CSS_SELECTOR, '.first_block .first')
     first_name.send_keys('Мой ответ')
-    last_name = browser.find_element(By.CSS_SELECTOR, '[placeholder = "Input your last name"]')
+    last_name = browser.find_element(By.CSS_SELECTOR, '.first_block .second')
     last_name.send_keys('Мой ответ')
-    email = browser.find_element(By.CSS_SELECTOR, '[placeholder = "Input your email"]')
+    email = browser.find_element(By.CSS_SELECTOR, '.third')
     email.send_keys('Мой ответ')
 
     # Отправляем заполненную форму

@@ -31,17 +31,22 @@ def browser_change_language(request):
     options = Options()
     options.add_experimental_option('prefs', {'intl.accept_languages': language})
     browser = webdriver.Chrome(options=options)
+    browser.implicitly_wait(5)
     yield browser
     print("\nquit browser..")
     browser.quit()
-# усовершенствованная фикстура, которая внутри себя вызывает request.config.getoption
-# идёт обращение к методу pytest_addoption (который выше) и в результате фикстура вынимает значение переданное при
-# запуске теста: pytest -s -v --browser_name=chrome test_addoption.py
-# после этого идёт развилка, создавать экземпляр движка Chrome или Firefox
-# если в тест была передана такая фикстура, то команда вида pytest -s -v test_addoption.py его уронит
-# т.к. фикстура будет вызывать pytest_addoption, а этот метод будет искать параметр --browser_name в команде
+
+
 @pytest.fixture(scope="function")
 def browser_addopt(request):
+    """
+    Усовершенствованная фикстура, которая внутри себя вызывает request.config.getoption. Идёт обращение к методу
+    pytest_addoption (который выше) и в результате фикстура вынимает значение переданное при запуске теста:
+    pytest -s -v --browser_name=chrome test_addoption.py
+    После этого идёт развилка, создавать экземпляр движка Chrome или Firefox.
+    Если в тест была передана такая фикстура, то команда вида pytest -s -v test_addoption.py его уронит,
+    т.к. фикстура будет вызывать pytest_addoption, а этот метод будет искать параметр --browser_name в команде
+    """
     browser_name = request.config.getoption("browser_name")
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")

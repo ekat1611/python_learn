@@ -3,35 +3,29 @@ classes_storage = {}
 
 # функция возвращает False, если is_child не потомок для is_parent, и True если потомок
 def check_parent(is_child, is_parent):
-    # если считанного класса нет в classes_storage, возвращаем No
     if is_child not in classes_storage:
         return False
-    # если в предках child-класса есть is_parent
-    if is_parent in classes_storage[is_child]["parents"]:
-        return True
-    # если is_child и is_parent равны
-    if is_child == is_parent:
+    if is_parent in classes_storage[is_child] or is_child == is_parent:
         return True
     # проходимся по предкам child класса
-    for p in classes_storage[is_child]["parents"]:
+    for p in classes_storage[is_child]:
         # если у предка есть ещё предки, опускаемся "глубже" по рекурсии
-        if len(classes_storage[p]["parents"]):
+        if len(classes_storage[p]):
             # если получаем True, возвращаем его же выше
             if check_parent(p, is_parent):
                 return True
     return False
 
 
-# считываем данные, чтобы записать их в словарь, структура {class: {parent: [A, B]}}
+# считываем данные, чтобы записать их в словарь, структура {class: [A, B]}
 for i in range(int(input())):
     string = input().split()
-    parents = string[2:]
     # добавляем в classes_storage child-класс
-    classes_storage[string[0]] = {"parents": [parents[i] for i in range(len(parents))]}
+    classes_storage[string[0]] = [string[2:][i] for i in range(len(string[2:]))]
     # добавляем в словарь всех предков с пустыми parents, т.к. они нам неизвестны
-    for parent in range(len(parents)):
-        if parents[parent] not in classes_storage:
-            classes_storage[parents[parent]] = {"parents": []}
+    for parent in range(len(string[2:])):
+        if string[2:][parent] not in classes_storage:
+            classes_storage[string[2:][parent]] = []
 
 for i in range(int(input())):
     input_string = input().split()
@@ -48,14 +42,6 @@ for i in range(int(input())):
 A : C B R
 B : D E
 R : Y
-1
-A E
-"""
-
-"""
-2
-AA : CC BB
-BB : DD EE
-1
-EE AA
+1 
+E A
 """

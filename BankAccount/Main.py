@@ -1,5 +1,5 @@
 from string import digits
-list_pass = open('password.txt')
+list_pass = open('test_passwords.txt')
 list_passwords = list_pass.read()
 list_passwords = list_passwords.split()
 
